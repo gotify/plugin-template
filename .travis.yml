@@ -1,0 +1,29 @@
+sudo: required
+language: go
+go:
+  - "1.11.5"
+
+notifications:
+  email: false
+
+env:
+  - GO111MODULE=on
+
+before_install:
+  - make download-tools
+  - go get
+
+script:
+  - make check
+
+before_deploy:
+  - make build
+
+deploy:
+  - provider: releases
+    api_key: $GH_TOKEN
+    file_glob: true
+    file: build/*.so
+    skip_cleanup: true
+    on:
+      tags: true
