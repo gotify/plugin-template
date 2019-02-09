@@ -1,19 +1,12 @@
-sudo: required
-dist: xenial
 language: go
 go:
   - "1.11.5"
 
+services:
+  - docker
+
 notifications:
   email: false
-
-addons:
-  apt:
-    packages:
-      - gcc-aarch64-linux-gnu
-      - g++-aarch64-linux-gnu
-      - gcc-arm-linux-gnueabihf
-      - g++-arm-linux-gnueabihf
 
 env:
   - GO111MODULE=on
@@ -26,9 +19,7 @@ script:
   - make check
 
 before_deploy:
-  -                                                        GOOS=linux GOARCH=amd64       make build
-  - CC=aarch64-linux-gnu-gcc   CXX=aarch64-linux-gnu-g++   GOOS=linux GOARCH=arm64       make build
-  - CC=arm-linux-gnueabihf-gcc CXX=arm-linux-gnueabihf-g++ GOOS=linux GOARCH=arm GOARM=7 make build
+  - make build
 
 deploy:
   - provider: releases
