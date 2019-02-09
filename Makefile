@@ -14,8 +14,16 @@ check-go-mod: create-bulid-dir
 	gomod-cap -from ${BUILDDIR}/gotify-server.mod -to go.mod -check=true
 	rm ${BUILDDIR}/gotify-server.mod || true
 
-build: create-bulid-dir
-	CGO_ENABLED=1 go build -o build/${PLUGIN_NAME}-${GOOS}-${GOARCH}${GOARM}.so -buildmode=plugin ${PLUGIN_ENTRY}
+build-linux-amd64:
+	 docker run --rm -v "$$PWD/.:/proj" -w /proj gotify/build:v1-linux-amd64 go build -a -installsuffix cgo -ldflags "-w -s" -buildmode=plugin -o build/${PLUGIN_NAME}-linux-amd64.so /proj
+
+build-linux-arm-7:
+	 docker run --rm -v "$$PWD/.:/proj" -w /proj gotify/build:v1-linux-arm-7 go build -a -installsuffix cgo -ldflags "-w -s" -buildmode=plugin -o build/${PLUGIN_NAME}-linux-arm-7.so /proj
+
+build-linux-arm64:
+	 docker run --rm -v "$$PWD/.:/proj" -w /proj gotify/build:v1-linux-arm64 go build -a -installsuffix cgo -ldflags "-w -s" -buildmode=plugin -o build/${PLUGIN_NAME}-linux-arm64.so /proj
+
+build: build-linux-arm-7 build-linux-amd64 build-linux-arm64
 
 check: check-go-mod
 
