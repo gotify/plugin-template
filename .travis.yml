@@ -9,17 +9,20 @@ notifications:
   email: false
 
 env:
-  - GO111MODULE=on
+  - GO111MODULE=on GOTIFY_VERSIONS="master"
 
 before_install:
   - make download-tools
-  - go get
+  - go get -d
 
 script:
-  - make check
+  - go test ./...
 
 before_deploy:
-  - make build
+  - >
+    for TARGET in $GOTIFY_VERSIONS; do
+      make GOTIFY_VERSION="$TARGET" FILE_SUFFIX="(for-gotify-$TARGET)" build;
+    done
 
 deploy:
   - provider: releases
