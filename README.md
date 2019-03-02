@@ -9,7 +9,7 @@ using [gotify/plugin-api](https://github.com/gotify/plugin-api).
 1. Change `PLUGIN_NAME` in [Makefile](Makefile).
 1. Setup building on every release
    * Enable travis-ci in your repository.
-   * Add `GITHUB_TOKEN` Environment Variable see [travis-ci docs](https://docs.travis-ci.com/user/deployment/pages/#setting-the-github-token).
+   * Add `GH_TOKEN` environment variable see [travis-ci docs](https://docs.travis-ci.com/user/deployment/pages/#setting-the-github-token).
 1. Implement your plugin. See [plugin docs](https://gotify.net/docs/plugin).
 1. Create a release to automatically build the plugin.
 
