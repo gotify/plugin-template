@@ -23,7 +23,7 @@ For building the plugin gotify/build docker images are used to ensure compatibil
 `GOTIFY_VERSION` can be a tag, commit or branch from the gotify/server repository.
 
 This command builds the plugin for amd64, arm-7 and arm64. 
-The resulting shared object will be compatible with gotify/server version 2.0.1.
+The resulting shared object will be compatible with gotify/server version 2.0.20.
 ```bash
-$ make GOTIFY_VERSION="v2.0.1" FILE_SUFFIX="for-gotify-v2.0.1" build
+$ make GOTIFY_VERSION="v2.0.20" FILE_SUFFIX="for-gotify-v2.0.20" build
 ```
