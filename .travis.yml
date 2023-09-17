@@ -1,6 +1,6 @@
 language: go
 go:
-  - "1.12"
+  - "1.21"
 
 services:
   - docker
@@ -9,7 +9,7 @@ notifications:
   email: false
 
 env:
-  - GO111MODULE=on GOTIFY_VERSIONS="v2.0.20"
+  - GO111MODULE=on GOTIFY_VERSIONS="v2.4.0"
 
 before_install:
   - make download-tools
