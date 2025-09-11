@@ -103,6 +103,16 @@ func (s *PluginServer) RunUserInstance(req *protobuf.UserInstanceRequest, stream
 		}
 	}
 	ticker := time.NewTicker(10 * time.Second)
+
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	go func() {
+		// your logic here
+		//
+		_ = ctx
+	}()
+
 	defer ticker.Stop()
 	for {
 		select {
